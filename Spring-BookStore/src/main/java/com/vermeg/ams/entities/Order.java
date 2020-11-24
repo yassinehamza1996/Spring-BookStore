@@ -24,7 +24,7 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id_order")
-	private int idOrder;
+	private long idOrder;
 	
 	@Column(name="orderDate")
 	@NotBlank(message = "required")
@@ -42,11 +42,11 @@ public class Order {
 		this.orderDate = orderDate;
 	}
 
-	public int getIdOrder() {
+	public long getIdOrder() {
 		return idOrder;
 	}
 
-	public void setIdOrder(int idOrder) {
+	public void setIdOrder(long idOrder) {
 		this.idOrder = idOrder;
 	}
 

@@ -9,9 +9,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 //@Table(name = "books")
@@ -22,27 +25,27 @@ public class Book {
 private int idBook;
 
 @Column (name="title")
-@NotBlank(message="Required")
+
 private String title;
 
 @Column (name="price")
-@NotBlank(message="Required")
+
 private double price;
 
 @Column (name="releaseDate")
-@NotBlank(message="Required")
+@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd",timezone = "GMT+5:30")
+@DateTimeFormat(pattern = "yyyy-MM-dd")
 private LocalDate releaseDate;
 
 @Column (name="author")
-@NotBlank(message="Required")
+
 private String author;
 
 @Column (name="coverImage")
-@NotBlank(message="Required")
 private String coverImage;
 
 @Column (name="quantity")
-@NotBlank(message="Required")
+
 private int quantity;
 
 
@@ -118,7 +121,6 @@ public int getQuantity() {
 public void setQuantity(int quantity) {
 	this.quantity = quantity;
 }
-
 @Override
 public String toString() {
 	return "Book [idBook=" + idBook + ", title=" + title + ", price=" + price + ", releaseDate=" + releaseDate

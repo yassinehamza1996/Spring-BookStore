@@ -18,7 +18,7 @@ public class OrderDetails {
 @Id
 @GeneratedValue
 @Column (name = "id_order_details")
-private int idOrderDetails;
+private long idOrderDetails;
 
 @Column (name = "order_quantity")
 @NotBlank (message = "required")
@@ -46,11 +46,11 @@ public OrderDetails(int orderQuantity,double orderPrice) {
 
 
 
-public int getIdOrderDetails() {
+public long getIdOrderDetails() {
 	return idOrderDetails;
 }
 
-public void setIdOrderDetails(int idOrderDetails) {
+public void setIdOrderDetails(long idOrderDetails) {
 	this.idOrderDetails = idOrderDetails;
 }
 
