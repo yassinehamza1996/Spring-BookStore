@@ -23,23 +23,23 @@ public class Client {
 	private int idClient;
 	
 	@Column (name="firstName")
-	@NotBlank (message="required")
+	//@NotBlank (message="required")
 	private String firstName;
 	
 	@Column (name="lastName")
-	@NotBlank (message="required")
+	//@NotBlank (message="required")
 	private String lastName;
 	
 	@Column (name="adress")
-	@NotBlank (message="required")
+	//@NotBlank (message="required")
 	private String adress;
 	
 	@Column (name="mail")
-	@NotBlank (message="required")
+	//@NotBlank (message="required")
 	private String mail;
 	
 	@Column (name="phoneNumber")
-	@NotBlank (message="required")
+	//@NotBlank (message="required")
 	private int phoneNumber;
 	
 	@OneToMany (fetch=FetchType.LAZY,

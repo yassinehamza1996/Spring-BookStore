@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="x-ua-compatible" content="ie=edge">
+ <title>Add Client</title>
+ <meta title="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+ <link rel="stylesheet"
+href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+crossorigin="anonymous">
+ <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+<body>
+ <div class="container my-5">
+ <h3> Add Client</h3>
+ <div class="card">
+ <div class="card-body">
+ <div class="col-md-10">
+ <form action="#" th:action="@{/client/add}"
+th:object="${client}" enctype="multipart/form-data" method="post">
+ <div class="row">
+ <div class="form-group col-md-8">
+ <label for="firstName" class="col-formlabel">First Name</label> <input type="text" th:field="*{firstName}" class="form-control"
+id="firstName" placeholder="firstName"> <span th:if="${#fields.hasErrors('firstName')}"
+th:errors="*{firstName}" class="text-danger"></span>
+ </div>
+ <div class="form-group col-md-8">
+ <label for="lastName" class="col-formlabel">Last Name</label> <input type="text" th:field="*{lastName}" class="formcontrol" id="lastName" placeholder="lastName"> <span
+th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="textdanger"></span>
+ </div>
+ <div class="form-group col-md-8">
+ <label for="adress" class="col-formlabel">Adress</label> <input type="text" th:field="*{adress}" class="formcontrol" id="adress" placeholder="adress"> <span
+th:if="${#fields.hasErrors('adress')}" th:errors="*{adress}" class="textdanger"></span>
+</div>
+ <div class="form-group col-md-8">
+<div class="form-group col-md-8">
+ <label for="mail" class="col-formlabel">mail</label> <input type="mail" th:field="*{mail}" name="mail"  id="mail" title="trip-start">      
+</div>
+<div class="form-group col-md-8">
+ <label for="phoneNumber" class="col-formlabel">Phone Number</label> <input type="tel" th:field="*{phoneNumber}" class="formcontrol" id="phoneNumber" placeholder="phoneNumber"> <span
+th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="textdanger"></span>
+</div>
+ <div class="col-md-6">
+ <input type="submit" class="btn btn-primary"
+value="Add Client">
+ </div>
+ <div class="form-group col-md-8"></div>
+ </div>
+ </form>
+ </div>
+ </div>
+ </div>
+ </div>
+</body>
+</html>

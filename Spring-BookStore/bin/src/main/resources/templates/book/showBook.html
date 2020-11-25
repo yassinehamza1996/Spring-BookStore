@@ -48,8 +48,8 @@ th:text="${book.author}">Author</p>
 </div>
  <div class="form-group col-md-6">
  <label for="label" class="col-formlabel">Picture</label>
- <img  th:src="@{'/uploads/'+
-${book.coverImage}}" width="250" height="250"/>
+ <img alt="${book.getcoverImage()}" th:src="@{'/uploads/'+
+${book.coverImage}}" width="700" height="700"/>
  </div> 
 
 <div class="form-group col-md-8">
