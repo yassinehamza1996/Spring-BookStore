@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -49,32 +51,35 @@ public class BookController {
 		model.addAttribute("book", book);
 		return "book/addBook";
 	}
+	@GetMapping("show/{id}")
+	public String ShowBookDetails(@PathVariable("id")int id,Model m) {
+		Book b = bookrepository.findById(id)
+				.orElseThrow(()-> new IllegalArgumentException("invalid book id"+id));
+		m.addAttribute("book", b);
+		return"book/showBook";
+	}
 
 	@PostMapping("add")
 	public String addBook(@Valid Book book, BindingResult result, Model model,@RequestParam("releaseDate")String date,@RequestParam("files") MultipartFile[] files) {
 		if (result.hasErrors()) {
 			return "book/addBook";
 		}
-		//image
 		StringBuilder fileName = new StringBuilder();
-		 MultipartFile file = files[0];
-		 Path fileNameAndPath = Paths.get(uploadDirectory,
-		file.getOriginalFilename());
+		MultipartFile file = files[0];
+		Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+		fileName.append(file.getOriginalFilename());
 
-		 fileName.append(file.getOriginalFilename());
-		 try {
-		Files.write(fileNameAndPath, file.getBytes());
+		try {
+			Files.write(fileNameAndPath, file.getBytes());
 		} catch (IOException e) {
-		e.printStackTrace();
+			e.printStackTrace();
 		}
-		 //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
-	        //convert String to LocalDate
-	      //LocalDate localDate = LocalDate.parse("2020/11/24", formatter);
-		// book.setReleaseDate(localDate);
-		 System.out.println("*********************************************************");
-		 //System.out.println(localDate);
-		 bookrepository.save(book);
+		book.setCoverImage(fileName.toString());
+
+		bookrepository.save(book);
 		return "redirect:list";
+
+	
 
 	}
 
@@ -97,10 +102,24 @@ public class BookController {
 	}
 
 	@PostMapping("update")
-	public String updateBook(@Valid Book book, BindingResult result, Model model) {
+	public String updateBook(@Valid Book book, BindingResult result, Model model,@RequestParam("files") MultipartFile[] files) {
 		if (result.hasErrors()) {
 			return "book/updateBook";
 		}
+		StringBuilder fileName = new StringBuilder();
+		MultipartFile file = files[0];
+		Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());
+		fileName.append(file.getOriginalFilename());
+
+		try {
+			Files.write(fileNameAndPath, file.getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		book.setCoverImage(fileName.toString());
+
+	
 		bookrepository.save(book);
 		return "redirect:list";
 	}

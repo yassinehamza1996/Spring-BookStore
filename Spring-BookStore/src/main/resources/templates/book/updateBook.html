@@ -21,9 +21,7 @@ crossorigin="anonymous">
  <div class="card">
  <div class="card-body">
  <div class="col-md-8">
- <form action="#"
-th:action="@{/book/update}" th:object="${book}"
-method="post">
+ <form action="#" th:action="@{/book/update}" th:object="${book}"  enctype="multipart/form-data" method="post">
 
 <input type="hidden" th:field="*{idBook}" />
  <div class="row">
@@ -45,6 +43,13 @@ th:field="*{price}" class="form-control" id="price"
 placeholder="price"> <span
 th:if="${#fields.hasErrors('price')}" th:errors="price"
 class="text-danger"></span>
+ </div>
+ <div class="form-group col-md-8">
+ <label for="releaseDate" class="col-formlabel">releaseDate</label> <input type="date" th:field="*{releaseDate}" name="releaseDate"  id="releaseDate" title="trip-start">      
+</div>
+<div class="form-group col-md-8">
+ <label for="coverImage" class="col-formlabel">coverImage</label>
+ <input class="form-control" type="file" name="files" multiple>
  </div>
  <div class="form-group col-md-8">
  <input type="submit" class="btn

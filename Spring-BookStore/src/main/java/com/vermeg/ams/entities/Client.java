@@ -20,7 +20,7 @@ public class Client {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column (name = "id_client")
-	private long idClient;
+	private int idClient;
 	
 	@Column (name="firstName")
 	@NotBlank (message="required")
@@ -59,10 +59,10 @@ public class Client {
 		this.mail = mail;
 		this.phoneNumber = phoneNumber;
 	}
-	public long getIdClient() {
+	public int getIdClient() {
 		return idClient;
 	}
-	public void setIdClient(long idClient) {
+	public void setIdClient(int idClient) {
 		this.idClient = idClient;
 	}
 	public String getFirstName() {

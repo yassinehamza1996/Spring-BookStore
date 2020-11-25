@@ -13,7 +13,6 @@ public class TestApplication {
 	public static void main(String[] args) {
 		new File(BookController.uploadDirectory).mkdir();
 		SpringApplication.run(TestApplication.class, args);
-		
 	}
 
 }

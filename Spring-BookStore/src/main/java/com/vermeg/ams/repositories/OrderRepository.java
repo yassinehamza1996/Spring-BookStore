@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.vermeg.ams.entities.Order;
 
-public interface OrderRepository extends CrudRepository<Order , Long> {
+public interface OrderRepository extends CrudRepository<Order,Integer> {
 
 }

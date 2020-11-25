@@ -1,60 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Show Book</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-
-
-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+ <meta charset="utf-8">
+ <meta http-equiv="x-ua-compatible" content="ie=edge">
+ <title>Show Book</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-
+MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+ <link rel="stylesheet"
+href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+integrity="sha384-
+5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+crossorigin="anonymous">
 </head>
 <body>
-<div class="container my-5">
-<h3 align="center">Book details</h3>
-<div class="card">
-<div class="card-body">
-<div class="col-md-8">
-<form action="#" method="">
-<div class="row">
+ <div class="container my-5">
+ <h3 align="center">Book details</h3>
+ <div class="card">
+ <div class="card-body">
+ <div class="col-md-8">
+ <form action="#" method="">
+ <div class="row">
+ <div class="form-group col-md-6">
+ <label for="label" class="col-formlabel">ID</label>
+ <p th:text="${book.idBook}">Id</p>
+ </div>
+
 <div class="form-group col-md-6">
-<label for="label" class="col-form-label">ID</label>
-<p th:text="${book.idBook}">Id</p>
-</div>
+ <label for="label" class="col-formlabel">Title</label>
+ <p th:text="${book.title}">Title</p>
+ </div>
 <div class="form-group col-md-6">
-<label for="label" class="col-form-label">Title</label>
-<p th:text="${book.title}">Title</p>
-</div>
+ <label for="label" class="col-formlabel">Price</label>
+ <p th:text="${book.price}">Price</p>
+ </div>
 <div class="form-group col-md-6">
-<label for="label" class="col-form-label">Price</label>
-<p th:text="${book.price}">Price</p>
+ <label for="label" class="col-formlabel">Author</label>
+ <p
+th:text="${book.author}">Author</p>
+ </div>
+ <div class="form-group col-md-8">
+ <label for="releaseDate" class="col-formlabel">releaseDate</label>
+  <input type="date" th:field="${book.releaseDate}" readonly="true" name="releaseDate"  id="releaseDate" title="trip-start">      
 </div>
-<div class="form-group col-md-6">
-<label for="label" class="col-form-label">Author</label>
-<p th:text="${book.author">Author</p>
-</div>
-<div class="form-group col-md-6">
-<label for="label" class="col-form-label">ReleaseDate</label>
-<p th:text="${book.releaseDate">ReleaseDate</p>
-</div>
-<div class="form-group col-md-6">
-<label for="label" class="col-form-label">Quantity</label>
-<p th:text="${book.quantity">ReleaseDate</p>
-</div>
-<div class="form-group col-md-6">
-<label for="label" class="col-form-label">Picture</label>
-<img alt="Image" th:src="@{'/uploads/'+ ${book.coverImage}}" width="250" height="250"/>
-</div>
+ <div class="form-group col-md-6">
+ <label for="label" class="col-formlabel">Picture</label>
+ <img alt="${book.getcoverImage()}" th:src="@{'/uploads/'+
+${book.coverImage}}" width="700" height="700"/>
+ </div> 
+
 <div class="form-group col-md-8">
 
-<a th:href="@{/book/list}"> <input type="button" class="btn btn-primary" value="return to book list"></a>
-</div>
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
+ <a th:href="@{/book/list}"> <input
+type="button" class="btn btn-primary" value="return to Book list"></a>
+
+ </div>
+ </div>
+ </form>
+ </div>
+ </div>
+ </div>
+ </div>
 </body>
 </html>

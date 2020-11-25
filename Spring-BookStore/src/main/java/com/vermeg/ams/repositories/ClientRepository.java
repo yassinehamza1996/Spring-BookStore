@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.vermeg.ams.entities.Client;
 
-public interface ClientRepository extends CrudRepository <Client , Long> {
+public interface ClientRepository extends CrudRepository<Client,Integer> {
 
 }

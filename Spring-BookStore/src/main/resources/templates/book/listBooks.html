@@ -34,11 +34,9 @@
 										<th>Author</th>
 										<th>Price</th>
 										<th>ReleaseDate</th>
-										<th>Quantity</th>
-										<th>Show</th> 
+										<th>Show</th>
 										<th>Edit</th>
 										<th>Delete</th>
-										
 									</tr>
 								</thead>
 								<tbody>
@@ -47,14 +45,7 @@
 										<td th:text="${book.author}"></td>
 										<td th:text="${book.price}"></td>
 										<td th:text="${book.releaseDate}"></td>
-										<td th:text="${book.quantity}"></td>
-										
-										<td>
-										<a th:href="@{/book/show/{id}(id=${book.idBook})}" class="btn btn-primary">
-										<i class="fas fa-user-show ml-2">
-										</i>Show details
-										</a>
-										</td>
+										<td><a th:href="@{/book/show/{id}(id=${book.idBook})}" class="btn btn-primary"><i class="fas fa-user-show ml-2">Show Details</i></a></td>
 										<td><a
 											th:href="@{/book/edit/{id}(id=${book.idBook})}"
 											class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
