@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Client List</title>
-<meta firstName="viewport" content="width=device-width, initial-scale=1">
+<title>Details Book List</title>
+<meta title="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -16,6 +16,7 @@
 <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
 </head>
 <body style="background:url('/uploads/1.png')">
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<a class="navbar-brand" href="#"> <img src="/uploads/NSYH.ico" width="60" height="60" class="d-inline-block align-left" alt=""> NYSH BookStore</a>
 		<div class="collapse navbar-collapse" id="navbarText">
@@ -26,43 +27,37 @@
 			</ul>
 		</div>
 	</nav>
-	<h1 align="center" style="color:black">List Clients</h1>
+	<h1 align="center" style="color:black">Books recomended</h1>
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body">
-				<div th:switch="${clients}" class="container my-5">
+				<div th:switch="${mybooks}" class="container my-5">
 					<p class="my-5">
-						<a th:href="@{'/client/add/'}" class="btn btn-primary"><i
-							class="fas fa-user-plus ml-2"> Add Client</i></a>
+						<a th:href="@{'/book/add/'}" class="btn btn-primary"><i
+							class="fas fa-user-plus ml-2"> Add Book</i></a>
 					</p>
 					<div class="col-md-10">
-						<h2 th:case="null">No Clients yet!</h2>
+						<h2 th:case="null">No books yet!</h2>
 						<div th:case="*">
 							<table class="table">
-  								 <thead class="thead-dark">
+ 								<thead class="thead-dark">
 									<tr>
-										<th scope="col">First Name</th>
-										<th scope="col">Last Name</th>
-										<th scope="col">Adress</th>
-										<th scope="col">Mail</th>
-										<th scope="col">Phone Number</th>
-										<th scope="col">Edit</th>
-										<th scope="col">Delete</th>
+										<th scope="col">Title</th>
+										<th scope="col">Author</th>
+										<th scope="col">Price</th>
+										<th scope="col">ReleaseDate</th>
+										<th scope="col">Show</th>
+										
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="client : ${clients}">
-										<td scope="row" th:text="${client.firstName}"></td>
-										<td scope="row" th:text="${client.lastName}"></td>
-										<td scope="row" th:text="${client.adress}"></td>
-										<td scope="row" th:text="${client.mail}"></td>
-										<td scope="row" th:text="${client.phoneNumber}"></td>
-										<td scope="row"><a
-											th:href="@{/client/edit/{id}(id=${client.idClient})}"
-											class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-										<td scope="row"><a
-											th:href="@{/client/delete/{id}(id=${client.idClient})}"
-											class="btn btn-danger"><i class="fas fa-user-times ml-2"></i></a></td>
+									<tr th:each="book : ${mybooks}">
+										<td scope="row" th:text="${book.title}"></td>
+										<td scope="row" th:text="${book.author}"></td>
+										<td scope="row" th:text="${book.price}"></td>
+										<td scope="row" th:text="${book.releaseDate}"></td>
+										<td scope="row"><a th:href="@{/book/show/{id}(id=${book.idBook})}" class="btn btn-primary"><i class="fas fa-user-show ml-2">Show Details</i></a></td>
+										
 									</tr>
 								</tbody>
 							</table>

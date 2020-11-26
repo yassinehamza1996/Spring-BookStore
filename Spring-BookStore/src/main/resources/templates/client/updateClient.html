@@ -15,9 +15,19 @@ integrity="sha384-
 5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 crossorigin="anonymous">
 </head>
-<body>
+<body style="background:url('/uploads/1.png')">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#"> <img src="/uploads/NSYH.ico" width="60" height="60" class="d-inline-block align-left" alt=""> NYSH BookStore</a>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/book/list/">Book</a></li>
+				<li class="nav-item"><a class="nav-link" href="/order/list/">Order</a></li>
+				<li class="nav-item"><a class="nav-link" href="/client/list">Client</a></li>
+			</ul>
+		</div>
+	</nav>
  <div class="container my-5">
- <h3> Update Client</h3>
+ <h1 align="center" style="color:white"> Update Client</h1>
  <div class="card">
  <div class="card-body">
  <div class="col-md-8">
@@ -38,7 +48,7 @@ th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
 class="text-danger"></span>
  </div>
  <div class="form-group col-md-8">
- <label for="adress" class="colform-label">mail</label> <input type="text"
+ <label for="adress" class="colform-label">adress</label> <input type="text"
 th:field="*{adress}" class="form-control" id="adress"
 placeholder="adress"> <span
 th:if="${#fields.hasErrors('mail')}" th:errors="adress"

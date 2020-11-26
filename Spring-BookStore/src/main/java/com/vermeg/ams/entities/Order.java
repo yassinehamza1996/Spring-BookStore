@@ -1,6 +1,7 @@
 package com.vermeg.ams.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -85,10 +86,10 @@ public class Order {
 	// select from id_book from orderdetail where id_order=?1
 	//
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
+	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			 CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "id_client")
-	private Client client;
+	private Client client_c;
 
 	/*public List<OrderDetails> getLignecom() {
 		return lignecom;
@@ -99,11 +100,11 @@ public class Order {
 	}
 */
 	public Client getClient() {
-		return client;
+		return  client_c;
 	}
 
 	public void setClient(Client client) {
-		this.client = client;
+		this.client_c = client;
 	}
 	
 	
@@ -119,7 +120,14 @@ public class Order {
 	private List<Book> books;
 
 	public void addmybooks(Book book) {
+		if (books == null) {
+			books = new ArrayList<>();
+		}
+
 		books.add(book);
+	}
+	public List<Book> getmybooks(){
+		return books;
 	}
 	
 	

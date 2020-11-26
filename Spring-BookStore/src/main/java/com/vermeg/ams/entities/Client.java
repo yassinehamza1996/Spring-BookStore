@@ -42,10 +42,10 @@ public class Client {
 	//@NotBlank (message="required")
 	private int phoneNumber;
 	
-	@OneToMany (fetch=FetchType.LAZY,
+	@OneToMany (mappedBy="client_c",fetch=FetchType.LAZY,
 			cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH}
 			)
-	@JoinColumn(name="id_order")
+
 	private List <Order> orders;
 	
 	public Client() {
@@ -108,7 +108,11 @@ public class Client {
 	}
 	
 	
-	
+	public String getln() {
+		
+		return this.getFirstName() + " "+ this.getLastName();
+		
+	}
 	
 
 }
