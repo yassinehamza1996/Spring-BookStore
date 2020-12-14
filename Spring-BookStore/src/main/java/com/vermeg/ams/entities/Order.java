@@ -15,8 +15,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 //@Table (name = "order")
@@ -80,25 +82,14 @@ public class Order {
 		return "Order [idOrder=" + idOrder + ", orderDate=" + orderDate + "]";
 	}
 
-	/*@OneToMany(mappedBy = "co", fetch = FetchType.LAZY)
-	private List<OrderDetails> lignecom;*/
-
-	// select from id_book from orderdetail where id_order=?1
-	//
-
-	@ManyToOne(cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY,cascade= {CascadeType.PERSIST, CascadeType.MERGE,
 			 CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "id_client")
+	@JsonIgnore
 	private Client client_c;
-
-	/*public List<OrderDetails> getLignecom() {
-		return lignecom;
-	}
-
-	public void setLignecom(List<OrderDetails> lignecom) {
-		this.lignecom = lignecom;
-	}
-*/
+	
 	public Client getClient() {
 		return  client_c;
 	}
@@ -107,30 +98,39 @@ public class Order {
 		this.client_c = client;
 	}
 	
-	
-	
-	@ManyToMany(fetch=FetchType.LAZY,
-			cascade= {CascadeType.PERSIST, CascadeType.MERGE,
-			 CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinTable(
-			name="order_details",
-			joinColumns=@JoinColumn(name="id_order"),
-			inverseJoinColumns=@JoinColumn(name="id_book")
-			)	
-	private List<Book> books;
+	@OneToMany(mappedBy = "orders", fetch = FetchType.EAGER,cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+			 CascadeType.DETACH, CascadeType.REFRESH,CascadeType.REMOVE})
+	private List<Order_Details> lignecom;
 
-	public void addmybooks(Book book) {
-		if (books == null) {
-			books = new ArrayList<>();
-		}
+	// select from id_book from orderdetail where id_order=?1
+	//
 
-		books.add(book);
+	public List<Order_Details> getLignecom() {
+		return lignecom;
 	}
-	public List<Book> getmybooks(){
-		return books;
+
+	public void setLignecom(List<Order_Details> lignecom) {
+		this.lignecom = lignecom;
 	}
+
 	
-	
+	/*
+	 * @ManyToMany(fetch=FetchType.EAGER, cascade= {CascadeType.PERSIST,
+	 * CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	 * 
+	 * @JoinTable( name="order_details", joinColumns=@JoinColumn(name="id_order"),
+	 * inverseJoinColumns=@JoinColumn(name="id_book") )
+	 * 
+	 * @JsonIgnore private List<Book> books;
+	 * 
+	 * public void addmybooks(Book book) { if (books == null) { books = new
+	 * ArrayList<>(); }
+	 * 
+	 * books.add(book); } public List<Book> getmybooks(){ return books; }
+	 * 
+	 * public void Setmybooks(List<Book> m) { if(books==null) { books=new
+	 * ArrayList<>(); } books=m; }
+	 */
 
 /*public void addorderdetails(OrderDetails orderdetail) {
 		this.lignecom.add(orderdetail);

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+ <meta charset="utf-8">
+ <meta http-equiv="x-ua-compatible" content="ie=edge">
+ <title>Add Book</title>
+ <meta title="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet"
+href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+crossorigin="anonymous">
+ <link rel="stylesheet"
+href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+crossorigin="anonymous">
+ <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+<body >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" href="#"> <img src="/uploads/NSYH.ico" width="60" height="60" class="d-inline-block align-left" alt=""> NYSH BookStore</a>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/book/list/">Book</a></li>
+				<li class="nav-item"><a class="nav-link" href="/order/list/">Order</a></li>
+				<li class="nav-item"><a class="nav-link" href="/client/list">Client</a></li>
+			</ul>
+		</div>
+	</nav>
+ <div class="container my-5">
+ <h1 align="center" style="color:white"> Add Book</h1>
+ <div class="card">
+ <div class="card-body">
+ <div class="col-md-10">
+ <form action="#" th:action="@{/book/add}"
+th:object="${book}" enctype="multipart/form-data" method="post">
+ <div class="row">
+ <div class="form-group col-md-8">
+ <label for="title" class="col-formlabel">Title</label> <input type="text" th:field="*{title}" class="form-control"
+id="title" placeholder="Title"> <span th:if="${#fields.hasErrors('title')}"
+th:errors="*{title}" class="text-danger"></span>
+ </div>
+ <div class="form-group col-md-8">
+ <label for="author" class="col-formlabel">Author</label> <input type="text" th:field="*{author}" class="formcontrol" id="author" placeholder="Author"> <span
+th:if="${#fields.hasErrors('author')}" th:errors="*{author}" class="textdanger"></span>
+ </div>
+ <div class="form-group col-md-8">
+ <label for="price" class="col-formlabel">Price</label> <input type="text" th:field="*{price}" class="formcontrol" id="price" placeholder="price"> <span
+th:if="${#fields.hasErrors('price')}" th:errors="*{price}" class="textdanger"></span>
+</div>
+ <div class="form-group col-md-8">
+<div class="form-group col-md-8">
+ <label for="releaseDate" class="col-formlabel">releaseDate</label> <input type="date" th:field="*{releaseDate}" name="releaseDate"  id="releaseDate" title="trip-start">      
+</div>
+<div class="form-group col-md-8">
+ <label for="coverImage" class="col-formlabel">coverImage</label>
+ <input class="form-control" type="file" name="files" multiple>
+ </div>
+ <div class="col-md-6">
+ <input type="submit" class="btn btn-primary"
+value="Add Book">
+ </div>
+ <div class="form-group col-md-8"></div>
+ </div>
+ </form>
+ </div>
+ </div>
+ </div>
+ </div>
+</body>
+</html>

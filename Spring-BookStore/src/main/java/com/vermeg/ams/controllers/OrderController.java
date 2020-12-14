@@ -6,6 +6,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vermeg.ams.entities.Book;
 import com.vermeg.ams.entities.Client;
@@ -45,12 +46,28 @@ public class OrderController {
 		List<Order> com = (List<Order>) orderRepository.findAll();
 		if (com.size() == 0)
 			com = null;
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String saymyname = authentication.getName();
+		
+		model.addAttribute("saymyname", saymyname);
 		model.addAttribute("orders", com);
 		return "order/listOrders";
 		// System.out.println(lp);
 		// return "Nombre de fournisseur = " + lp.size();
 	}
-
+	
+	@GetMapping("listall")
+	public String listclient(Model m) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String saymyname = authentication.getName();
+		m.addAttribute("saymyname", saymyname);
+		Client c = clientrepository.findByEmail(saymyname);
+		List<Order> myorder = orderRepository.getOrderbyclient(c.getIdClient());
+		m.addAttribute("orders", myorder);
+			return "order/listclient";	
+	}
+	
 	@GetMapping("add")
 	public String showAddorderForm(Model model) {
 		Order order = new Order();// object dont la valeur des attributs par defaut
@@ -79,7 +96,7 @@ public class OrderController {
 					.orElseThrow(() -> new IllegalArgumentException("invalid id "));
 			prices+=b.getPrice();
 
-			order.addmybooks(b);
+			//order.addmybooks(b);
 		}
 		order.setPrice(prices);
 		orderRepository.save(order);
@@ -91,11 +108,11 @@ public class OrderController {
 		
 		Order o = orderRepository.findById(id)
 				.orElseThrow(()-> new IllegalArgumentException("Invalid ID"+id));
-		List<Book> mybooks = o.getmybooks();
+		//List<Book> mybooks = o.getmybooks();
 		System.out.println("------------------------------------------------------------------------");
-		System.out.println(mybooks.size()+mybooks.toString());
+		//System.out.println(mybooks.size()+mybooks.toString());
 		System.out.println("**************************************************************************");
-		m.addAttribute("mybooks", mybooks);
+		//m.addAttribute("mybooks", mybooks);
 		return"order/details";
 	}
 	

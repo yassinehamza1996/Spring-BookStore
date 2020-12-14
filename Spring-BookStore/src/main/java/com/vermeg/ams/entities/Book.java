@@ -1,21 +1,20 @@
 package com.vermeg.ams.entities;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 //@Table(name = "books")
@@ -45,22 +44,21 @@ public class Book {
 	@Column(name = "coverImage")
 	private String coverImage;
 
-//@Column (name="quantity")
+	@Column(name = "quantity")
 
-//private int quantity;
+	private int quantity;
 
 	public Book() {
 
 	}
 
-	public Book(String title, double price, LocalDate releaseDate, String author, String coverImage)// , int quantity)
-	{
+	public Book(String title, double price, LocalDate releaseDate, String author, String coverImage, int quantity) {
 		this.title = title;
 		this.price = price;
 		this.releaseDate = releaseDate;
 		this.author = author;
 		this.coverImage = coverImage;
-		// this.quantity = quantity;
+		this.quantity = quantity;
 	}
 
 	public int getIdBook() {
@@ -111,36 +109,45 @@ public class Book {
 		this.coverImage = coverImage;
 	}
 
-//public int getQuantity() {
-	// return quantity;
-//}
+	public int getQuantity() {
+		return quantity;
+	}
 
-//public void setQuantity(int quantity) {
-	// this.quantity = quantity;
-//}
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [idBook=" + idBook + ", title=" + title + ", price=" + price + ", releaseDate=" + releaseDate
-				+ ", author=" + author + ", coverImage=" + coverImage + "]";// + ", quantity=" + quantity + "]";
+				+ ", author=" + author + ", coverImage=" + coverImage + "]" + ", quantity=" + quantity + "]";
 	}
 
-	/*
-	 * @JsonIgnore
-	 * 
-	 * @OneToMany(mappedBy="book",fetch=FetchType.LAZY) private Collection
-	 * <OrderDetails> ligneco;
-	 * 
-	 * 
-	 * 
-	 * public Collection<OrderDetails> getLigneco() { return ligneco; }
-	 * 
-	 * public void setLigneco(Collection<OrderDetails> ligneco) { this.ligneco =
-	 * ligneco; }
-	 */
+	@JsonIgnore
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
-	@JoinTable(name = "order_details", joinColumns = @JoinColumn(name = "id_book"), inverseJoinColumns = @JoinColumn(name = "id_order"))
-	private List<Order> orders;
+	//optionnel je peux recupérer la liste des books qui se trouve dans les liste des commandes 
+	@OneToMany(mappedBy = "books", fetch = FetchType.LAZY)
+	private List<Order_Details> ligneco;
+
+	public List<Order_Details> getLigneco() {
+		return ligneco;
+	}
+
+	public void setLigneco(List<Order_Details> ligneco) {
+		this.ligneco = ligneco;
+	}
+
+	// LAZY POUR DELETE
+	// EAGER POUR AFFICHE
+
+	/*
+	 * @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST,
+	 * CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH })
+	 * 
+	 * @JoinTable(name = "order_details", joinColumns = @JoinColumn(name =
+	 * "id_book"), inverseJoinColumns = @JoinColumn(name = "id_order"))
+	 * 
+	 * @JsonIgnore private List<Order> orders;
+	 */
 
 }

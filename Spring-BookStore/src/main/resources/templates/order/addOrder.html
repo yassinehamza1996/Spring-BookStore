@@ -16,6 +16,8 @@ href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 crossorigin="anonymous">
 
+
+
 </head>
 
 <body style="background:url('/uploads/1.png')">
@@ -29,21 +31,32 @@ crossorigin="anonymous">
 			</ul>
 		</div>
 	</nav>
-<h1 align="center">Ajouter une commande</h1>
-<div>
-<form th:object="${order}" th:action="@{/order/add}" method="post" align="center">
+	<br>
+<h1 align="center" style="text-align: center;
+  font-size:32px;
+  height: 10px;
+  line-height: 2px;
+  color:#8080c0;
+  text-shadow: 0 0 3px #000000, 0 0 5px #000000;">Add an Order</h1>
 
-<div class="form-group col-md-8">
-<label for="client" class="col-form-label">Client :</label>
-<label >
-<select name="idclient" class="form-control">
-<option th:each="client : ${clients}"  th:value="${client.idClient}" th:text="${client.getln()}"/>
- </select>
-</label>
+<div>
+<form th:object="${order}" th:action="@{/orderdetails/addorder}" method="post" align="center">
+
+<div  class="form-group col-md-8">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
 </div>
 
 <div class="form-group col-md-8">
-<label for="date" class="col-form-label">Order Date: </label><input type="text" readonly th:field="${order.orderDate}"></p>	
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label for="date"  style="color:white; size:20px;" class="col-form-label">
+<h3><i>Order Date: </i></h3></label>
+<label >
+<input type="text" class="form-control" style="width:100px; align="center"" readonly th:field="${order.orderDate}">
+</label>
 </div>
 <div class="container my-5">
 <table class="table" style="background-color:white">
@@ -53,6 +66,7 @@ crossorigin="anonymous">
 										<th>Author</th>
 										<th>Price</th>
 										<th>ReleaseDate</th>
+										<th>Quantity</th>
 										<th>Show</th>
 										<th>Check</th>
 										
@@ -62,10 +76,12 @@ crossorigin="anonymous">
 									<tr th:each="book : ${books}">
 										<td th:text="${book.title}"></td>
 										<td th:text="${book.author}"></td>
-										<td th:text="${book.price}"></td>
+										<td th:text="${book.price}+'$'"></td>
 										<td th:text="${book.releaseDate}"></td>
+										<td><input type="number" name="quantite" /></td>
 										<td><a th:href="@{/book/show/{id}(id=${book.idBook})}" class="btn btn-primary"><i class="fas fa-user-show ml-2">Show Details</i></a></td>
 										<td><input type="checkbox" name="checkid" th:value="${book.idBook}" /></td>
+										
 									</tr>
 								</tbody>
 							</table>

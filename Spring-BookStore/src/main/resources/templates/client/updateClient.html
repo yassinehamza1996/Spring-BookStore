@@ -51,11 +51,11 @@ class="text-danger"></span>
  <label for="adress" class="colform-label">adress</label> <input type="text"
 th:field="*{adress}" class="form-control" id="adress"
 placeholder="adress"> <span
-th:if="${#fields.hasErrors('mail')}" th:errors="adress"
+th:if="${#fields.hasErrors('adress')}" th:errors="adress"
 class="text-danger"></span>
  </div>
 <div class="form-group col-md-8">
- <label for="mail" class="colform-label">mail</label> <input type="mail"
+ <label for="mail" class="colform-label">mail</label> <input type="text"
 th:field="*{mail}" class="form-control" id="mail"
 placeholder="mail"> <span
 th:if="${#fields.hasErrors('mail')}" th:errors="mail"
@@ -64,7 +64,13 @@ class="text-danger"></span>
  <div class="form-group col-md-8">
  <label for="phoneNumber" class="col-formlabel">phoneNumber</label> <input type="tel" th:field="*{phoneNumber}" name="phoneNumber"  id="phoneNumber" firstName="trip-start">      
 </div>
-
+ </div>
+ <div class="form-group col-md-8">
+ <label for="phoneNumber" class="col-formlabel">Role</label> 
+       <select name="r" class="col-formlabel">
+       <option  th:each="r:${r}" th:text="${r.getRole()}"></option>
+       </select>
+</div>
  <div class="form-group col-md-8">
  <input type="submit" class="btn
 btn-primary" value="Update Client">

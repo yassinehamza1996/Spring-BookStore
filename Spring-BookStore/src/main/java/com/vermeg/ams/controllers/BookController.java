@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,14 +41,30 @@ public class BookController {
 		List<Book> liste = (List<Book>) bookrepository.findAll();
 		if (liste.size() == 0)
 			liste = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String saymyname = authentication.getName();
+		
+		model.addAttribute("saymyname", saymyname);
 		model.addAttribute("books", liste);
 		return "book/listBooks";
 	}
-
+	
+	@GetMapping("listall")
+	public String getexampleofbooks( Model model) {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String saymyname = authentication.getName();
+		
+		model.addAttribute("saymyname", saymyname);
+		return "book/listexample";
+	}
 	@GetMapping("add")
 	public String showaddform(Model model) {
 		Book book = new Book();
 		model.addAttribute("book", book);
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String saymyname = authentication.getName();
+		
+		model.addAttribute("saymyname", saymyname);
 		return "book/addBook";
 	}
 	@GetMapping("show/{id}")
@@ -106,6 +122,11 @@ public class BookController {
 		if (result.hasErrors()) {
 			return "book/updateBook";
 		}
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String saymyname = authentication.getName();
+		
+		model.addAttribute("saymyname", saymyname);
+		
 		StringBuilder fileName = new StringBuilder();
 		MultipartFile file = files[0];
 		Path fileNameAndPath = Paths.get(uploadDirectory, file.getOriginalFilename());

@@ -1,10 +1,11 @@
-package com.vermeg.ams.controllers;
+package com.vermeg.ams.RestControllers;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,10 +21,13 @@ import com.vermeg.ams.repositories.BookRepository;
 
 @RestController
 @RequestMapping({"/bookrest/"})
+@CrossOrigin(origins="*")
 public class RestBookController {
 
 	@Autowired
 	private BookRepository bookrepository;
+	@Autowired
+	OrderService orderservice;
 	
 	@GetMapping("list")
 	public List<Book> getBook(){
@@ -58,5 +62,13 @@ public class RestBookController {
 		return book;
 	   
 	}
+	@GetMapping("/count/{idBook}")
+	public double getmycount(@PathVariable("idBook") List<Integer> lid) {
+		
+		List<Book> lb = (List<Book>) bookrepository.findAllById(lid);
+		
+		return orderservice.ComputeTotalPrice(lb);
+	}
+	
 	
 }

@@ -28,14 +28,12 @@
 		</div>
 	</nav>
 	<h1 align="center" style="color:black">Books recomended</h1>
+	
 	<div class="container my-2">
 		<div class="card">
 			<div class="card-body">
-				<div th:switch="${mybooks}" class="container my-5">
-					<p class="my-5">
-						<a th:href="@{'/book/add/'}" class="btn btn-primary"><i
-							class="fas fa-user-plus ml-2"> Add Book</i></a>
-					</p>
+				<div th:switch="${myorders}" class="container my-5">
+					
 					<div class="col-md-10">
 						<h2 th:case="null">No books yet!</h2>
 						<div th:case="*">
@@ -44,21 +42,24 @@
 									<tr>
 										<th scope="col">Title</th>
 										<th scope="col">Author</th>
-										<th scope="col">Price</th>
+										<th scope="col">Unit Price</th>
+										<th scope="col">Quantity</th>
 										<th scope="col">ReleaseDate</th>
 										<th scope="col">Show</th>
 										
 									</tr>
 								</thead>
 								<tbody>
-									<tr th:each="book : ${mybooks}">
-										<td scope="row" th:text="${book.title}"></td>
-										<td scope="row" th:text="${book.author}"></td>
-										<td scope="row" th:text="${book.price}"></td>
-										<td scope="row" th:text="${book.releaseDate}"></td>
-										<td scope="row"><a th:href="@{/book/show/{id}(id=${book.idBook})}" class="btn btn-primary"><i class="fas fa-user-show ml-2">Show Details</i></a></td>
-										
+								
+									<tr th:each="order : ${myorders}" >
+										<td scope="row" th:text="${order.getBooks().getTitle()}"></td>
+										<td scope="row" th:text="${order.getBooks().getAuthor()}"></td>
+										<td scope="row" th:text="${order.unitprice}"></td>
+										<td scope="row" th:text="${order.totalquantity}"></td>
+										<td scope="row" th:text="${order.getBooks().getReleaseDate()}"></td>
+										<td scope="row"><a th:href="@{/book/show/{id}(id=${order.getBooks().getIdBook()})}" class="btn btn-primary"><i class="fas fa-user-show ml-2">Show Details</i></a></td>
 									</tr>
+								
 								</tbody>
 							</table>
 						</div>
