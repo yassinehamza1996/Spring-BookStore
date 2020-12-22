@@ -18,7 +18,7 @@ import com.vermeg.ams.controllers.BookController;
 @SpringBootApplication
 //@EntityScan("com.vermeg.ams.entities")
 //@EnableJpaRepositories(basePackages= {"com.vermeg.ams.repositories"})
-public class TestApplication extends SpringBootServletInitializer implements CommandLineRunner {
+public class TestApplication  implements CommandLineRunner {
 	@Autowired
 	 private JavaMailSender javaMailSender;
 	void sendEmail() {
