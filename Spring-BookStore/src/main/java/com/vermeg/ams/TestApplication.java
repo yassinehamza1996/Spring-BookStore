@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
@@ -17,7 +18,7 @@ import com.vermeg.ams.controllers.BookController;
 @SpringBootApplication
 //@EntityScan("com.vermeg.ams.entities")
 //@EnableJpaRepositories(basePackages= {"com.vermeg.ams.repositories"})
-public class TestApplication implements CommandLineRunner {
+public class TestApplication extends SpringBootServletInitializer implements CommandLineRunner {
 	@Autowired
 	 private JavaMailSender javaMailSender;
 	void sendEmail() {

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -126,7 +127,7 @@ public class Book {
 	@JsonIgnore
 
 	//optionnel je peux recupérer la liste des books qui se trouve dans les liste des commandes 
-	@OneToMany(mappedBy = "books", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "books", fetch = FetchType.LAZY,cascade= {CascadeType.ALL})
 	private List<Order_Details> ligneco;
 
 	public List<Order_Details> getLigneco() {

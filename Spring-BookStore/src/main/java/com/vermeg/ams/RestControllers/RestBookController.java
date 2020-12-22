@@ -1,6 +1,7 @@
 package com.vermeg.ams.RestControllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -69,6 +70,12 @@ public class RestBookController {
 		
 		return orderservice.ComputeTotalPrice(lb);
 	}
+	
+	@GetMapping("/{idBook}")
+	 public Optional<Book> getMyBook(@PathVariable("idBook") int idBook) {
+	 return bookrepository.findById(idBook);
+	 }
+
 	
 	
 }
